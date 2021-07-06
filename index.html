@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+   <script src = "/socket.io/socket.io.js"></script>
+   <script>
+        var socket = io();
+
+        setInterval(function() {
+            jQuery(".fade-it").delay(150).animate({
+                "background-color": "#fc9"
+            }, 350, function () {
+                $(".fade-it").animate({
+                "background-color": "#fff"
+                }, 200);
+            });
+            socket.emit('updateStatsFromClient');
+        }, 10000)
+
+        socket.on('updatePlayers', function(data){
+            var players = data.players;
+            for(var i = 0; i < players.length; i++) {
+                var html = '<tr><td>' + players[i].name + '</td></tr>';
+                jQuery('tbody').prepend(html);
+            }
+        });
+
+        socket.on('updateStatsFromServer', function(data){
+            var players = data.players;
+            console.log(players);
+            var html = '';
+            jQuery('.fade-it').removeClass('atBat');
+            for(var i = 0; i < players.length; i++) {
+                html += '<tr class="fade-it"><td>' + players[i].name + '</td><td>' +  players[i].stats+ '</td></tr>';
+            }
+               
+            jQuery('tbody').html(html);
+        });
+   </script>
+   <body>
+        <table>
+            <tbody>
+                <tr></tr>
+            </tbody>
+        </table>
+   </body>
+</html>

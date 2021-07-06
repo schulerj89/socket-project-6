@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "browserless": "^9.1.0",
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
+    "html-get": "^2.9.0",
+    "http": "^0.0.1-security",
+    "nodemon": "^2.0.9",
+    "path": "^0.12.7",
+    "puppeteer": "^10.1.0",
+    "save": "^2.4.0",
+    "socket.io": "^4.1.2"
+  }
+}
